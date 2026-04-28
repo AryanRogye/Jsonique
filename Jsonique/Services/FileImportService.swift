@@ -2,14 +2,15 @@
 //  FileImportService.swift
 //  Jsonique
 //
-//  Created by Aryan Rogye on 4/28/26.
+//  Created by ChatGPT on 4/28/26.
 //
 
 import Foundation
 
+/**
+ * Copies selected files to a temporary directory and returns the new working URLs.
+ */
 enum FileImportService {
-    
-    /// Copies selected files to a temporary directory and returns the new working URLs.
     static func createWorkingCopies(from urls: [URL]) throws -> [URL] {
         let fileManager = FileManager.default
         let tempDir = fileManager.temporaryDirectory

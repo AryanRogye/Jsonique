@@ -2,11 +2,17 @@
 //  JSONLParser.swift
 //  Jsonique
 //
-//  Created by Aryan Rogye on 4/28/26.
+//  Created by ChatGPT on 4/28/26.
 //
 
 import Foundation
 
+/**
+ * Takes raw `.jsonl` text and turns each line into a `DatasetRow`.
+ *
+ * JSONL is not one big JSON object — each line is its own object,
+ * so we decode line-by-line and figure out which row type it is.
+ */
 enum JSONLParser {
     static func decode(_ text: String) throws -> [DatasetRow] {
         let decoder = JSONDecoder()

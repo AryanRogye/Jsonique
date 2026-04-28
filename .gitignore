@@ -1,0 +1,57 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Xcode user state
+*.xcuserstate
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcscmblueprint
+*.xcuserdatad/
+
+# Xcode build output
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.app
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Keep Xcode's resolved package pins for reproducible app builds.
+!*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
+# CocoaPods / Carthage, in case the project grows later
+Pods/
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output/
+
+# AppCode / JetBrains
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Local environment overrides
+.env
+.env.*
+!.env.example

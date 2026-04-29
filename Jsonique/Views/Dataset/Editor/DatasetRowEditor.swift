@@ -19,11 +19,31 @@ struct DatasetRowEditor: View {
             CompletionRowEditor(row: completionBinding)
             
         case .chat:
-            Text("Chat editor goes here")
+            ChatRowEditor(row: chatBinding)
             
         case .tools:
-            Text("Tools editor goes here")
+            ToolRowEditor(row: toolBinding)
         }
+    }
+
+    private var toolBinding: Binding<ToolsRow> {
+        Binding<ToolsRow>(
+            get: { 
+                if case .tools(let value) = row { return value }
+                return ToolsRow(messages: [], tools: [])
+            },
+            set: { row = .tools($0) }
+        )
+    }
+
+    private var chatBinding: Binding<ChatRow> {
+        Binding<ChatRow>(
+            get: { 
+                if case .chat(let value) = row { return value }
+                return ChatRow(messages: [])
+            },
+            set: { row = .chat($0) }
+        )
     }
     
     private var textBinding: Binding<TextRow> {

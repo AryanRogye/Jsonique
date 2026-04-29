@@ -21,7 +21,7 @@ enum ToolType: String, Codable {
  * Matches the standard JSON Schema types (e.g. string, number, object)
  * used when defining tool input structures.
  */
-enum JSONSchemaType: String, Codable {
+enum JSONSchemaType: String, Codable, CaseIterable {
     case string
     case number
     case integer

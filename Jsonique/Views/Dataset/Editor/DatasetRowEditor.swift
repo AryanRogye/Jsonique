@@ -16,7 +16,7 @@ struct DatasetRowEditor: View {
             TextRowEditor(row: textBinding)
             
         case .completion:
-            Text("Completion Editor Goes Here")
+            CompletionRowEditor(row: completionBinding)
             
         case .chat:
             Text("Chat editor goes here")

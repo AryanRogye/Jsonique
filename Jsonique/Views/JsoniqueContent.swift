@@ -10,12 +10,17 @@ import SwiftUI
 struct JsoniqueContent: View {
     @Bindable var vm: JsoniqueViewModel
     @State private var showAddNewRow = false
+    @State private var showExporter = false
+    @State private var exportDocument = JSONLExportDocument()
     
     var body: some View {
         HSplitView {
             List(selection: $vm.selectedRowIndex) {
                 if !vm.document.rows.isEmpty {
-                    Button("Add New Row") { showAddNewRow = true }
+                    HStack {
+                        Button("Add New Row") { showAddNewRow = true }
+                        Button("Export") { exportJSONL() }
+                    }
                 }
                 ForEach(vm.document.rows.indices, id: \.self) { index in
                     DatasetSidebar(row: vm.document.rows[index])
@@ -42,6 +47,16 @@ struct JsoniqueContent: View {
         .sheet(isPresented: $showAddNewRow) {
             sheet
         }
+        .fileExporter(
+            isPresented: $showExporter,
+            document: exportDocument,
+            contentType: .jsonl,
+            defaultFilename: exportFilename
+        ) { result in
+            if case .failure(let error) = result {
+                vm.showError(error)
+            }
+        }
     }
     
     private var sheet: some View {
@@ -65,5 +80,19 @@ struct JsoniqueContent: View {
         }
         .padding()
         .presentationDetents([.medium])
+    }
+
+    private var exportFilename: String {
+        let name = vm.selectedFileURL?.deletingPathExtension().lastPathComponent ?? "dataset"
+        return "\(name).jsonl"
+    }
+
+    private func exportJSONL() {
+        do {
+            exportDocument = JSONLExportDocument(text: try JSONLParser.encode(vm.document.rows))
+            showExporter = true
+        } catch {
+            vm.showError(error)
+        }
     }
 }

@@ -48,4 +48,28 @@ enum JSONLParser {
                 )
             }
     }
+
+    static func encode(_ rows: [DatasetRow]) throws -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+
+        let lines = try rows.map { row in
+            let data: Data
+
+            switch row {
+            case .chat(let chatRow):
+                data = try encoder.encode(chatRow)
+            case .tools(let toolsRow):
+                data = try encoder.encode(toolsRow)
+            case .completion(let completionRow):
+                data = try encoder.encode(completionRow)
+            case .text(let textRow):
+                data = try encoder.encode(textRow)
+            }
+
+            return String(decoding: data, as: UTF8.self)
+        }
+
+        return lines.joined(separator: "\n") + "\n"
+    }
 }

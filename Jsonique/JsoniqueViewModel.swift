@@ -56,6 +56,8 @@ final class JsoniqueViewModel {
             DispatchQueue.main.async {
                 guard let self else { return }
                 if let url = self.selectedFileURL {
+                    /// this is important because this was causing a crash
+                    self.selectedRowIndex = 0
                     self.loadDocument(from: url)
                 }
                 self.startObservations()
@@ -116,6 +118,11 @@ final class JsoniqueViewModel {
         } catch {
             print("Failed to load:", error)
         }
+    }
+
+    public func showError(_ error: Error) {
+        self.error = error.localizedDescription
+        showError = true
     }
     
     /**
